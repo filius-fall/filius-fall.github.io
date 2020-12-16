@@ -1,7 +1,7 @@
 ---
 published: true
 ---
-# Learnt new things
+### Learnt new things
 
 Today i learnt important things from reading the book "The Atomic Habits".
 Main points i learned are:
