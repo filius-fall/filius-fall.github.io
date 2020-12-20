@@ -11,3 +11,5 @@ published: true
 4. Read 5 pages
 
 5. Real python article (https://realpython.com/lessons/parsing-syntax/)
+
+6. Design the system.
