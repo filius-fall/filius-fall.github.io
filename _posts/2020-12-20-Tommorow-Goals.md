@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 
 1.Edit About page of your Jekll Blog.
