@@ -16,3 +16,4 @@ I always thought new year's resolution was dumb. if we really should do a thing 
 6. Maintain a blog to make sure to follow above
 7. Set specific targets for every month at the start
 8. Work on your addictions(Social media).
+9. Build a system(Write it down in your own private Journal)
