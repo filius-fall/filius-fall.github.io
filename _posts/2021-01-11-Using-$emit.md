@@ -6,15 +6,13 @@ Now i will tell you about how i used $emit to update a table list of entires fro
 
 ***P.S***: Read my previous post to get an idea of how i structured my app
 
-
-
-![]()![Screenshot from 2021-01-11 17-29-47](/home/filius_fall/Pictures/Screenshot from 2021-01-11 17-29-47.png)
+![Screenshot from 2021-01-11 17-29-47]({{https://github.com/filius-fall/filius-fall.github.io}}/assets/Screenshot from 2021-01-11 17-29-47.png)
 
 
 
 This is my app layout. It isnt pretty now but it is still work in progress. Now when i click open Modal it will open a Modal like this.
 
-![](/home/filius_fall/Pictures/Screenshot from 2021-01-11 17-31-09.png)
+![]({{https://github.com/filius-fall/filius-fall.github.io}}/assets/Screenshot from 2021-01-11 17-31-09.png)
 
 So now when i add details and submit the table should automatically add new row without refreshing.So what i did was ***emit*** a event when i submit and catch the event to automatically add it to table.
 
