@@ -1,23 +1,23 @@
 ---
-published: false
+published: true
 ---
-In this post i will try to explain how i used $emit, i didint know before can be used in that way. By building a project i am learning lot how much there is a difference between theory and practical. I thought i know VueJs well when i read the entire Documentation but when i was left alone to build on my own i didnt able to use 70% of Vue features(which i hadnt even thought about existing).This project is making me realise importance of a guidance of expert, even though there are many self-taught great programmers i think most of them had at some point had some interaction with a expert. If not they truly are gifted.
+In this post i will try to explain how i used $emit, i didn't know before can be used in that way. By building a project i am learning lot how much there is a difference between theory and practical. I thought I know VueJs well when i read the entire Documentation but when i was left alone to build on my own i didn't able to use 70% of Vue features(which I hadn't even thought about existing).This project is making me realise importance of a guidance of expert, even though there are many self-taught great programmers i think most of them had at some point had some interaction with a expert. If not they truly are gifted.
 
 
 
-Now i will tell you about how i used $emit to update a table list of entires from database at the instant they are added.
+Now i will tell you about how i used $emit to update a table list of entries from database at the instant they are added.
 
-***P.S***: Read my previous post to get an idea of how i structured my app
+***P.S***: Read my previous post to get an idea of how I structured my app
 
 ![Layout Image]({{ site.url }}/assets/01.png)
 
 
 
-This is my app layout. It isnt pretty now but it is still work in progress. Now when i click open Modal it will open a Modal like this.
+This is my app layout. It isnt pretty now but it is still work in progress. Now when I click open Modal it will open a Modal like this.
 
 ![Modal image]({{site.url }}/assets/02.png)
 
-So now when i add details and submit the table should automatically add new row without refreshing.So what i did was ***emit*** a event when i submit and catch the event to automatically add it to table.
+So now when i add details and submit the table should automatically add new row without refreshing. So what I did was ***emit*** a event when i submit and catch the event to automatically add it to table.
 
 
 
@@ -66,7 +66,7 @@ methods: {
 ​        },
 ```
 
-Now look at the end when the details are set we emit an event called "Add::Student" to root element since they arent parent and child components. If they were parent and child components we could have communicated using props if parent want childs data, but we child wants parent data we still have to $emit but only to $parent not to root.
+Now look at the end when the details are set we emit an event called "Add::Student" to root element since they aren't parent and child components. If they were parent and child components we could have communicated using props if parent want child's data, but we child wants parent data we still have to $emit but only to $parent not to root.
 
 So now in list.js we listen to this event by using $root.$on
 
@@ -97,7 +97,7 @@ in list.js
 
 We need to use this in the created because we should know the changes immediately when the component is created.
 
-***Note***: This is personal mistake i forgot that mounted(), created() and remaining life cycles are just functions that will execute according to their name so the scope will be applied to them so please be aware of the data variables you create during them like var new_entry cant be accessed across the Application.
+***Note***: This is personal mistake I forgot that mounted(), created() and remaining life cycles are just functions that will execute according to their name so the scope will be applied to them so please be aware of the data variables you create during them like var new_entry cant be accessed across the Application.
 
 
 
