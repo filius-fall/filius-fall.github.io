@@ -1,7 +1,7 @@
 ---
 published: true
 ---
-In this post i will try to explain how I used $emit, I didn't know before can be used in that way. By building a project I am learning lot how much there is a difference between theory and practical. I thought I know VueJs well when I read the entire Documentation but when I was left alone to build on my own I didn't able to use 70% of Vue features(which I hadn't even thought about existing).This project is making me realise importance of a guidance of expert, even though there are many self-taught great programmers I think most of them had at some point had some interaction with a expert. If not they truly are gifted.
+In this post I will try to explain how I used $emit, I didn't know before can be used in that way. By building a project I am learning lot how much there is a difference between theory and practical. I thought I know VueJs well when I read the entire Documentation but when I was left alone to build on my own I didn't able to use 70% of Vue features(which I hadn't even thought about existing).This project is making me realise importance of a guidance of expert, even though there are many self-taught great programmers I think most of them had at some point had some interaction with a expert. If not they truly are gifted.
 
 
 
