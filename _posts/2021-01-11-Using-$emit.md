@@ -1,3 +1,6 @@
+---
+published: false
+---
 In this post i will try to explain how i used $emit, i didint know before can be used in that way. By building a project i am learning lot how much there is a difference between theory and practical. I thought i know VueJs well when i read the entire Documentation but when i was left alone to build on my own i didnt able to use 70% of Vue features(which i hadnt even thought about existing).This project is making me realise importance of a guidance of expert, even though there are many self-taught great programmers i think most of them had at some point had some interaction with a expert. If not they truly are gifted.
 
 
@@ -6,13 +9,13 @@ Now i will tell you about how i used $emit to update a table list of entires fro
 
 ***P.S***: Read my previous post to get an idea of how i structured my app
 
-![Layout Image]({{https://github.com/filius-fall/filius-fall.github.io}}/assets/01.png)
+![Layout Image]({{ site.url }}/assets/01.png)
 
 
 
 This is my app layout. It isnt pretty now but it is still work in progress. Now when i click open Modal it will open a Modal like this.
 
-![Modal image]({{https://github.com/filius-fall/filius-fall.github.io}}/assets/02.png)
+![Modal image]({{site.url }}/assets/02.png)
 
 So now when i add details and submit the table should automatically add new row without refreshing.So what i did was ***emit*** a event when i submit and catch the event to automatically add it to table.
 
@@ -110,5 +113,4 @@ This is it for today.
 
 Thank you for reading my post and hope you like my post.
 
-If you have any queries or wanted to point out my mistakes in code or my writing or do you want to contact me. Please email to filiusfall@gmail.com. 
-
+If you have any queries or wanted to point out my mistakes in code or my writing or do you want to contact me. Please email to filiusfall@gmail.com.
