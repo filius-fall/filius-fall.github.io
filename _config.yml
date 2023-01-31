@@ -12,13 +12,13 @@ mode: dark # default theme "dark" | "light"
 author:
   name: Sreeram Ambalam # author name
   bio: >- # tell to the world
-    Filius-Fall's Blog. 
+    Filius-Fall's Blog.<br> 
     Join me on my digital journey! Find me on <a href="https://github.com/filius-fall/" target="_blank" rel="noopener">Github</a> and <a href="https://twitter.com/filius_fall" target="_blank" rel="noopener">Twitter</a> for a closer look into my work and thoughts.
   username: filiusfall # general username
   github: filius-fall # github username
   twitter: filius_fall # twitter username
   email: asreeram1729@gmail.com # email adress
-  avatar: /assets/img/own_image.JPG # change with your own avatar
+  avatar: /assets/img/image.png # change with your own avatar
 
 # URL settings
 url: "filius-fall.github.io/" #

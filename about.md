@@ -1,16 +1,14 @@
 ---
-title: Colophon
+title: Sreeram A
 permalink: /about/
 layout: page
-excerpt: Hello peeps, I'm student of computer science from Banyuwangi, living in Jogjakarta. This blog for documentation about my programming journey, running on jekyll, hosting on netlify and using my own simple theme.
+excerpt: Hello peeps, I'm Python enthusiast and manga reader, currently living in Bangalore. This blog for documentation about my programming journey, discussion on stories I read.
 comments: false
 ---
 
-He's a student from Banyuwangi, living in Jogjakarta. the blog for documentation about his programming 🎒 journey, running on jekyll, hosting on [now.sh](http://now.sh) and using his own theme, he name it <a href="https://github.com/piharpi/jekyll-klise" target="_blank" rel="noopener">klisé</a>, he also loves to learning web technology; but he often forgot, that a reason why him doing the writing.
+Filius-fall is a passionate Python developer with a love for technology and open-source. With a keen eye for detail and a drive for innovation, he brings a unique perspective to his work. In his free time, he indulges in his love for anime and never misses an opportunity to explore the latest tech trends. Join him on his journey as he shares his insights and experiences in the world of development and Linux.
 
 If you have a question about him or else, just send a letter to him.
-
-You can [report](http://github.com/piharpi/jekyll-klise/issues/new) if there is an broken link(s) or somethings else.
 
 **may u needs ✨**
 
