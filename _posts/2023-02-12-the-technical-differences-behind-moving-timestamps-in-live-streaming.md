@@ -1,14 +1,8 @@
 ---
 layout: post
-title:  The Technical Differences Behind Moving Timestamps in Live Streaming: A Comparison of YouTube and Twitch
-date:   2023-02-12 16:03:00 +0500
-tags:   HTTP, Protocols, Live Streaming
-Engineer: sreeram ambalam
-Status: Complete 🙌
-Tags: HTTP, Protocols, Live Streaming
-Type: General Blog
-
-
+title:  "The Technical Differences Behind Moving Timestamps in Live Streaming: A Comparison of YouTube and Twitch"
+date:   2023-02-12 18:29:20 +0700
+categories: Internet Protocols, HTTP, UDP, Live Streaming
 ---
 
 Live  streaming has become a popular way to share video content online, and  two of the biggest platforms for live streaming are YouTube and Twitch.  While both platforms offer live streaming capabilities, there is a  significant difference between the two in terms of moving the timestamp  in a live stream. In this article, we will explore the technical reasons why YouTube supports moving timestamps and Twitch does not.
