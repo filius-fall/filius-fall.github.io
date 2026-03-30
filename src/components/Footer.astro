@@ -17,7 +17,7 @@ import { siteMeta, socialLinks, withBase } from '../lib/site.ts';
         <div>
           <p class="site-footer__label">Pages</p>
           <a href={withBase('/about/')}>About</a>
-          <a href={withBase('/blog/')}>Writing</a>
+          <a href={withBase('/blog/')}>Blog</a>
           <a href={withBase('/resume/')}>Resume</a>
         </div>
         <div>
@@ -34,7 +34,7 @@ import { siteMeta, socialLinks, withBase } from '../lib/site.ts';
         <p class="site-footer__label">Contact</p>
         <p>Location: {siteMeta.location}</p>
         <p>{siteMeta.email}</p>
-        <a class="button button--ghost" href={`mailto:${siteMeta.email}`}>
+        <a class="footer-link" href={`mailto:${siteMeta.email}`}>
           Say hello
         </a>
         <p>© 2026 {siteMeta.name}.</p>

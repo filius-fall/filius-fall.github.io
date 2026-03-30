@@ -23,12 +23,12 @@ const { Content } = await render(post);
   <div class="shell-container page-shell">
     <article class="article-shell">
       <header class="article-header">
-        <a href={withBase('/blog/')} class="article-back">Back to writing</a>
+        <a href={withBase('/blog/')} class="article-back">Back to blog</a>
         <div class="article-header__meta">
-          <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+          <span>{formatDate(post.data.pubDate)}</span>
           <span>{estimateReadingTime(post.body)}</span>
           {post.data.categories?.map((category) => (
-            <span class="chip">{category}</span>
+            <span>{category}</span>
           ))}
         </div>
         <TerminalText as="h1" text={post.data.title} variant="section" />

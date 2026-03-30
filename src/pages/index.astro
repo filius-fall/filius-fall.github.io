@@ -13,7 +13,7 @@ const recentPosts = posts
 <Layout title="Home" description={`${siteMeta.name} is a Python developer writing about systems, software, and open source.`}>
   <div class="shell-container page-shell">
     <section class="hero-block">
-      <p class="eyebrow">Portfolio, writing, systems</p>
+      <p class="eyebrow">Portfolio // Blog // Systems</p>
       <TerminalText
         as="h1"
         text={siteMeta.name}
@@ -23,28 +23,18 @@ const recentPosts = posts
       <p class="hero-copy hero-copy--lead">{siteMeta.role}</p>
       <p class="hero-copy">{homepageSections.intro}</p>
       <div class="inline-links">
-        <a href={withBase('/blog/')} class="button">Read the writing</a>
-        <a href={withBase('/about/')} class="button button--ghost">About</a>
-        <a href={withBase('/resume/')} class="button button--ghost">Resume</a>
+        <a href={withBase('/blog/')} class="button">Read the blog</a>
+        <a href={withBase('/about/')} class="button">About</a>
+        <a href={withBase('/resume/')} class="button">Resume</a>
       </div>
-      <div class="meta-row">
-        <span>{siteMeta.location}</span>
-        <span>Available for practical engineering work</span>
-        <span>GitHub: filius-fall</span>
-      </div>
+      <p class="meta-line">{siteMeta.location} / Available for practical engineering work / GitHub: filius-fall</p>
     </section>
 
     <section class="content-section">
-      <div class="section-intro">
-        <TerminalText as="h2" text="What I bring" variant="section" />
-        <p>
-          Backend reliability, tools that earn their keep, and writing that turns vague implementation talk into something concrete.
-        </p>
-      </div>
-
-      <div class="simple-grid">
+      <TerminalText as="h2" text="What I bring" variant="section" />
+      <div class="text-list">
         {capabilityCards.map((card) => (
-          <article class="simple-card">
+          <article class="list-entry">
             <h3>{card.title}</h3>
             <p>{card.description}</p>
           </article>
@@ -53,13 +43,7 @@ const recentPosts = posts
     </section>
 
     <section class="content-section">
-      <div class="section-intro">
-        <TerminalText as="h2" text="Recent writing" variant="section" />
-        <p>
-          Protocols, streaming, transport, and the implementation details that decide whether systems stay calm or turn noisy.
-        </p>
-      </div>
-
+      <TerminalText as="h2" text="Recent blog posts" variant="section" />
       <div class="archive-list">
         {recentPosts.map((post) => (
           <article class="archive-entry">
@@ -78,10 +62,8 @@ const recentPosts = posts
       </div>
     </section>
 
-    <section class="content-section content-section--compact">
-      <div class="section-intro">
-        <h2>Current focus</h2>
-      </div>
+    <section class="content-section">
+      <h2>Current focus</h2>
       <ul class="plain-list">
         {homepageSections.currentFocus.map((item) => (
           <li>{item}</li>

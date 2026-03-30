@@ -8,10 +8,10 @@ const blog = await getCollection('blog');
 const sortedBlog = blog.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<Layout title="Writing" description={`Technical writing and notes from ${siteMeta.name}.`}>
+<Layout title="Blog" description={`Technical writing and notes from ${siteMeta.name}.`}>
   <div class="shell-container page-shell">
     <section class="hero-block hero-block--page">
-      <p class="eyebrow">Writing</p>
+      <p class="eyebrow">Blog</p>
       <TerminalText
         as="h1"
         text="Notes on systems, protocols, and software behavior"
@@ -20,11 +20,7 @@ const sortedBlog = blog.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate
       <p class="page-copy">
         A simple archive of technical posts written to be useful first: clear enough for learning, technical enough to reward rereading.
       </p>
-      <div class="meta-row">
-        <span>{sortedBlog.length} entries</span>
-        <span>Newest first</span>
-        <span>Systems / Protocols / Software</span>
-      </div>
+      <p class="meta-line">{sortedBlog.length} entries / Newest first / Systems / Protocols / Software</p>
     </section>
 
     <section class="content-section">

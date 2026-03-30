@@ -7,7 +7,6 @@ import { socialLinks, siteMeta } from '../lib/site.ts';
 <Layout title="Contact" description={`Get in touch with ${siteMeta.name}.`}>
   <div class="shell-container page-shell">
     <section class="hero-block hero-block--page">
-      <p class="eyebrow">Contact</p>
       <TerminalText
         as="h1"
         text="If the work sounds relevant, reach out."
@@ -19,24 +18,26 @@ import { socialLinks, siteMeta } from '../lib/site.ts';
     </section>
 
     <section class="content-section">
-      <div class="simple-grid">
+      <div class="text-list">
         {socialLinks.map((link) => (
-          <a href={link.href} class="simple-card simple-card--link" target={link.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
-            <p class="card-kicker">{link.label}</p>
-            <h2>{link.value}</h2>
-            <p>Open the channel</p>
-          </a>
+          <article class="list-entry">
+            <h2>{link.label}</h2>
+            <p>{link.value}</p>
+            <a href={link.href} class="archive-entry__link" target={link.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
+              Open the channel
+            </a>
+          </article>
         ))}
-
-        <article class="simple-card">
-          <h2>Good reasons to write</h2>
-          <ul class="plain-list">
-            <li>Backend engineering discussions and practical Python work</li>
-            <li>Open source collaboration or technical writing ideas</li>
-            <li>Interesting problems involving systems, protocols, or tooling</li>
-          </ul>
-        </article>
       </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Good reasons to write</h2>
+      <ul class="plain-list">
+        <li>Backend engineering discussions and practical Python work</li>
+        <li>Open source collaboration or technical writing ideas</li>
+        <li>Interesting problems involving systems, protocols, or tooling</li>
+      </ul>
     </section>
   </div>
 </Layout>

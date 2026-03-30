@@ -23,7 +23,7 @@ export const siteMeta = {
 export const navigation: NavItem[] = [
   { href: '/', label: 'Home' },
   { href: '/about/', label: 'About' },
-  { href: '/blog/', label: 'Writing' },
+  { href: '/blog/', label: 'Blog' },
   { href: '/resume/', label: 'Resume' },
   { href: '/contact/', label: 'Contact' },
 ];
@@ -56,7 +56,7 @@ export const homepageSections = {
     'Developer tooling and open source',
     'Networking, systems, and protocol deep dives',
   ],
-  recentWritingTitle: 'Recent writing',
+  recentWritingTitle: 'Recent blog posts',
 };
 
 export function withBase(path: string): string {
