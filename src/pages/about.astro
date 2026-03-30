@@ -1,69 +1,63 @@
 ---
-import avatar from '../../assets/img/avatar.jpg';
 import TerminalText from '../components/TerminalText.astro';
-import TerminalWindow from '../components/TerminalWindow.astro';
 import Layout from '../layouts/Layout.astro';
 import { siteMeta } from '../lib/site.ts';
 ---
 
 <Layout title="About" description={`About ${siteMeta.name}, a Python developer with a strong interest in systems, tools, and open source.`}>
-  <div class="shell-container terminal-page">
-    <section class="terminal-section">
+  <div class="shell-container page-shell">
+    <section class="hero-block hero-block--page">
+      <p class="eyebrow">About</p>
       <TerminalText
         as="h1"
-        text="About the operator"
-        eyebrow="about"
-        variant="hero"
+        text="I build with Python, write to clarify ideas, and keep following the systems underneath the interface."
+        variant="section"
       />
       <p class="page-copy">
-        I build with Python, write to clarify ideas, and keep following the systems underneath the interface.
+        I’m based in Bengaluru and drawn to work that combines implementation detail with clean explanation.
       </p>
     </section>
 
-    <section class="hero-grid hero-grid--about">
-      <TerminalWindow title="about.txt" command="cat about.txt">
+    <section class="content-section">
+      <div class="text-block">
         <p class="page-copy">
           I’m based in Bengaluru and drawn to work that combines implementation detail with clean explanation. That usually means backend services, automation, open source tooling, and technical writing that turns hand-wavy concepts into something concrete.
         </p>
-      </TerminalWindow>
-
-      <TerminalWindow title="snapshot.png" command="display portrait" class="visual-shell">
-        <div class="portrait-frame portrait-frame--tight">
-          <img src={avatar.src} alt={`${siteMeta.name} portrait`} />
-        </div>
-      </TerminalWindow>
+      </div>
     </section>
 
-    <section class="signal-grid">
-      <TerminalWindow title="philosophy.md" command="read mindset">
-        <p class="terminal-label">How I think about software</p>
-        <p>
-          Good software feels calm. It has enough structure to stay readable, enough rigor to survive change, and enough restraint not to hide complexity behind decoration.
-        </p>
-        <p>
-          I care about maintainable code, debugging the real source of a problem, and understanding why a system behaves the way it does instead of just patching symptoms.
-        </p>
-      </TerminalWindow>
+    <section class="content-section">
+      <div class="simple-grid">
+        <article class="simple-card">
+          <h2>How I think about software</h2>
+          <p>
+            Good software feels calm. It has enough structure to stay readable, enough rigor to survive change, and enough restraint not to hide complexity behind decoration.
+          </p>
+          <p>
+            I care about maintainable code, debugging the real source of a problem, and understanding why a system behaves the way it does instead of just patching symptoms.
+          </p>
+        </article>
 
-      <TerminalWindow title="interests.log" command="tail -n 4 interests">
-        <p class="terminal-label">Technical interests</p>
-        <ul class="signal-list">
-          <li>Python applications, APIs, and automation tooling</li>
-          <li>Networking, protocols, and system behavior under real constraints</li>
-          <li>Open source projects that teach good engineering taste</li>
-          <li>Writing that makes backend concepts easier to grasp</li>
-        </ul>
-      </TerminalWindow>
+        <article class="simple-card">
+          <h2>Technical interests</h2>
+          <ul class="plain-list">
+            <li>Python applications, APIs, and automation tooling</li>
+            <li>Networking, protocols, and system behavior under real constraints</li>
+            <li>Open source projects that teach good engineering taste</li>
+            <li>Writing that makes backend concepts easier to grasp</li>
+          </ul>
+        </article>
 
-      <TerminalWindow title="outside-work.md" command="read context">
-        <p class="terminal-label">Outside work</p>
-        <p>
-          I read manga, keep an eye on emerging tools, and spend an unreasonable amount of time following implementation details that most people happily ignore.
-        </p>
-        <p>
-          This site is where those threads meet: personal portfolio, technical notebook, and a place to document what I’m learning.
-        </p>
-      </TerminalWindow>
+        <article class="simple-card">
+          <h2>Outside work</h2>
+          <p>
+            I read manga, keep an eye on emerging tools, and spend an unreasonable amount of time following implementation details that most people happily ignore.
+          </p>
+          <p>
+            This site is where those threads meet: personal portfolio, technical notebook, and a place to document what I’m learning.
+          </p>
+        </article>
+      </div>
     </section>
   </div>
 </Layout>

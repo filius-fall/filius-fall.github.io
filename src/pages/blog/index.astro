@@ -1,77 +1,45 @@
 ---
 import { getCollection } from 'astro:content';
 import TerminalText from '../../components/TerminalText.astro';
-import TerminalWindow from '../../components/TerminalWindow.astro';
 import Layout from '../../layouts/Layout.astro';
 import { estimateReadingTime, formatDate, siteMeta, withBase } from '../../lib/site.ts';
 
 const blog = await getCollection('blog');
 const sortedBlog = blog.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const [featuredPost, ...archivePosts] = sortedBlog;
 ---
 
 <Layout title="Writing" description={`Technical writing and notes from ${siteMeta.name}.`}>
-  <div class="shell-container terminal-page">
-    <section class="terminal-section">
+  <div class="shell-container page-shell">
+    <section class="hero-block hero-block--page">
+      <p class="eyebrow">Writing</p>
       <TerminalText
         as="h1"
-        text="Archive Terminal"
-        eyebrow="writing index"
-        variant="hero"
+        text="Notes on systems, protocols, and software behavior"
+        variant="section"
       />
       <p class="page-copy">
-        Notes on systems, protocols, software behavior, and the parts worth understanding properly. Built as an archive first, not a content dump.
+        A simple archive of technical posts written to be useful first: clear enough for learning, technical enough to reward rereading.
       </p>
-      <div class="status-strip">
-        <span>entries: {sortedBlog.length}</span>
-        <span>focus: systems / protocols / software behavior</span>
-        <span>sort: newest first</span>
+      <div class="meta-row">
+        <span>{sortedBlog.length} entries</span>
+        <span>Newest first</span>
+        <span>Systems / Protocols / Software</span>
       </div>
     </section>
 
-    {featuredPost && (
-      <TerminalWindow title="featured-entry" command="open latest_post" class="featured-post">
-        <div class="featured-post__meta">
-          <span>{formatDate(featuredPost.data.pubDate)}</span>
-          <span>{estimateReadingTime(featuredPost.body)}</span>
-          <span>{featuredPost.data.categories?.join(' / ')}</span>
-        </div>
-        <h2>{featuredPost.data.title}</h2>
-        {featuredPost.data.description && <p>{featuredPost.data.description}</p>}
-        <a href={withBase(`/blog/${featuredPost.id.replace('.md', '')}/`)} class="button">
-          read featured post
-        </a>
-      </TerminalWindow>
-    )}
-
-    <section class="terminal-section">
-      <div class="section-lead section-lead--split">
-        <TerminalText
-          as="h2"
-          text="Full Archive"
-          eyebrow="all posts"
-          variant="section"
-        />
-        <p class="page-copy">
-          Each entry keeps the metadata visible so browsing feels like working through a real archive instead of opening random cards.
-        </p>
-      </div>
-
-      <div class="archive-list archive-list--dense">
-        {archivePosts.map((post, index) => (
-          <article class="archive-entry archive-entry--dense">
-            <div class="archive-entry__index">0{index + 1}</div>
-            <div class="archive-entry__body">
-              <div class="archive-entry__meta">
-                <span>{formatDate(post.data.pubDate)}</span>
-                <span>{estimateReadingTime(post.body)}</span>
-                <span>{post.data.categories?.join(' / ')}</span>
-              </div>
-              <h3>{post.data.title}</h3>
-              {post.data.description && <p>{post.data.description}</p>}
+    <section class="content-section">
+      <div class="archive-list">
+        {sortedBlog.map((post) => (
+          <article class="archive-entry">
+            <div class="archive-entry__meta">
+              <span>{formatDate(post.data.pubDate)}</span>
+              <span>{estimateReadingTime(post.body)}</span>
+              <span>{post.data.categories?.join(' / ')}</span>
             </div>
+            <h2>{post.data.title}</h2>
+            {post.data.description && <p>{post.data.description}</p>}
             <a href={withBase(`/blog/${post.id.replace('.md', '')}/`)} class="archive-entry__link">
-              open
+              Read article
             </a>
           </article>
         ))}

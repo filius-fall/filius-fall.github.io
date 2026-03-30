@@ -5,6 +5,7 @@ interface Props {
   eyebrow?: string;
   variant?: 'hero' | 'section' | 'label';
   compact?: boolean;
+  split?: 'none' | 'words';
 }
 
 const {
@@ -13,9 +14,13 @@ const {
   eyebrow,
   variant = 'section',
   compact = false,
+  split = 'none',
 } = Astro.props;
 
 const Tag = as;
+const processedText = split === 'words'
+  ? text.trim().split(/\s+/).join('\n')
+  : text;
 ---
 
 <div
@@ -25,11 +30,11 @@ const Tag = as;
     compact && 'terminal-text--compact',
   ]}
   data-terminal-text-root
-  data-text={text}
+  data-text={processedText}
 >
   {eyebrow && <p class="terminal-text__eyebrow">{eyebrow}</p>}
   <Tag class="terminal-text__canvas" data-terminal-text-canvas>
-    <span class="terminal-text__fallback" data-terminal-text-fallback>{text}</span>
+    <span class="terminal-text__fallback" data-terminal-text-fallback>{processedText}</span>
   </Tag>
 </div>
 

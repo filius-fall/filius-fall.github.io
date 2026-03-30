@@ -1,73 +1,74 @@
 ---
 import TerminalText from '../components/TerminalText.astro';
-import TerminalWindow from '../components/TerminalWindow.astro';
 import Layout from '../layouts/Layout.astro';
 import { siteMeta, withBase } from '../lib/site.ts';
 ---
 
 <Layout title="Resume" description={`${siteMeta.name}'s experience, strengths, and resume.`}>
-  <div class="shell-container terminal-page">
-    <section class="terminal-section">
+  <div class="shell-container page-shell">
+    <section class="hero-block hero-block--page">
+      <p class="eyebrow">Resume</p>
       <TerminalText
         as="h1"
-        text="Resume / capability dump"
-        eyebrow="resume"
-        variant="hero"
+        text="Python-first engineering with a bias toward reliability, readability, and systems thinking."
+        variant="section"
       />
       <p class="page-copy">
-        Python-first engineering with a bias toward reliability, readability, and systems thinking.
+        I work best on software that benefits from clear abstractions, careful implementation, and someone willing to understand how the whole stack fits together.
       </p>
-      <div class="hero-command-row">
+      <div class="inline-links">
         <a href={withBase(`/${siteMeta.resumeFile}`)} download class="button">
-          download pdf resume
+          Download PDF resume
         </a>
       </div>
     </section>
 
-    <section class="signal-grid">
-      <TerminalWindow title="strengths.md" command="read capabilities">
-        <p class="terminal-label">Core capabilities</p>
-        <ul class="signal-list">
-          <li>Python development for applications, automation, and backend services</li>
-          <li>JavaScript and TypeScript for product surfaces and tooling</li>
-          <li>REST APIs, scripting, Git workflows, and Linux-based development</li>
-          <li>Explaining technical systems clearly in writing</li>
-        </ul>
-      </TerminalWindow>
+    <section class="content-section">
+      <div class="simple-grid">
+        <article class="simple-card">
+          <h2>Core capabilities</h2>
+          <ul class="plain-list">
+            <li>Python development for applications, automation, and backend services</li>
+            <li>JavaScript and TypeScript for product surfaces and tooling</li>
+            <li>REST APIs, scripting, Git workflows, and Linux-based development</li>
+            <li>Explaining technical systems clearly in writing</li>
+          </ul>
+        </article>
 
-      <TerminalWindow title="workflow.md" command="read expectations">
-        <p class="terminal-label">What you can expect</p>
-        <ul class="signal-list">
-          <li>Clean implementation with attention to maintainability</li>
-          <li>Comfort debugging behavior across layers, not just symptoms</li>
-          <li>Bias toward pragmatic solutions instead of decorative complexity</li>
-          <li>Curiosity around systems, protocols, and developer experience</li>
-        </ul>
-      </TerminalWindow>
+        <article class="simple-card">
+          <h2>What you can expect</h2>
+          <ul class="plain-list">
+            <li>Clean implementation with attention to maintainability</li>
+            <li>Comfort debugging behavior across layers, not just symptoms</li>
+            <li>Bias toward pragmatic solutions instead of decorative complexity</li>
+            <li>Curiosity around systems, protocols, and developer experience</li>
+          </ul>
+        </article>
 
-      <TerminalWindow title="toolbox.json" command="cat stack">
-        <p class="terminal-label">Tools I reach for</p>
-        <div class="chip-row">
-          <span class="chip">Python</span>
-          <span class="chip">TypeScript</span>
-          <span class="chip">JavaScript</span>
-          <span class="chip">Astro</span>
-          <span class="chip">React</span>
-          <span class="chip">Linux</span>
-          <span class="chip">Git</span>
-          <span class="chip">REST APIs</span>
-        </div>
-      </TerminalWindow>
+        <article class="simple-card">
+          <h2>Tools I reach for</h2>
+          <div class="chip-row">
+            <span class="chip">Python</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">Astro</span>
+            <span class="chip">React</span>
+            <span class="chip">Linux</span>
+            <span class="chip">Git</span>
+            <span class="chip">REST APIs</span>
+          </div>
+        </article>
 
-      <TerminalWindow title="contact.env" command="printenv CONTACT">
-        <p class="terminal-label">Reach me directly</p>
-        <ul class="signal-list">
-          <li>{siteMeta.email}</li>
-          <li>github.com/filius-fall</li>
-          <li>@filius_fall</li>
-          <li>{siteMeta.location}</li>
-        </ul>
-      </TerminalWindow>
+        <article class="simple-card">
+          <h2>Reach me directly</h2>
+          <ul class="plain-list">
+            <li>{siteMeta.email}</li>
+            <li>github.com/filius-fall</li>
+            <li>@filius_fall</li>
+            <li>{siteMeta.location}</li>
+          </ul>
+        </article>
+      </div>
     </section>
   </div>
 </Layout>

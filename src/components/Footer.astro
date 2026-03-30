@@ -1,5 +1,4 @@
 ---
-import TerminalText from './TerminalText.astro';
 import { siteMeta, socialLinks, withBase } from '../lib/site.ts';
 ---
 
@@ -7,13 +6,8 @@ import { siteMeta, socialLinks, withBase } from '../lib/site.ts';
   <div class="shell-container">
     <div class="site-footer__inner">
       <div class="site-footer__intro">
-        <TerminalText
-          as="h2"
-          text={siteMeta.name}
-          eyebrow="session summary"
-          variant="label"
-          compact
-        />
+        <p class="site-footer__eyebrow">About this site</p>
+        <h2>{siteMeta.name}</h2>
         <p>
           Personal site for notes on engineering, systems, and the work of making software feel deliberate.
         </p>
@@ -21,13 +15,13 @@ import { siteMeta, socialLinks, withBase } from '../lib/site.ts';
 
       <div class="site-footer__links">
         <div>
-          <p class="site-footer__label">routes</p>
-          <a href={withBase('/about/')}>about</a>
-          <a href={withBase('/blog/')}>writing</a>
-          <a href={withBase('/resume/')}>resume</a>
+          <p class="site-footer__label">Pages</p>
+          <a href={withBase('/about/')}>About</a>
+          <a href={withBase('/blog/')}>Writing</a>
+          <a href={withBase('/resume/')}>Resume</a>
         </div>
         <div>
-          <p class="site-footer__label">signals</p>
+          <p class="site-footer__label">Elsewhere</p>
           {socialLinks.map((link) => (
             <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
               {link.label}
@@ -37,15 +31,13 @@ import { siteMeta, socialLinks, withBase } from '../lib/site.ts';
       </div>
 
       <div class="site-footer__meta">
-        <p class="site-footer__label">status</p>
+        <p class="site-footer__label">Contact</p>
         <p>Location: {siteMeta.location}</p>
-        <p>Build target: GitHub Pages</p>
+        <p>{siteMeta.email}</p>
         <a class="button button--ghost" href={`mailto:${siteMeta.email}`}>
-          start conversation
+          Say hello
         </a>
-        <p>
-          © 2026 {siteMeta.name}. static, dark, and still blinking.
-        </p>
+        <p>© 2026 {siteMeta.name}.</p>
       </div>
     </div>
   </div>

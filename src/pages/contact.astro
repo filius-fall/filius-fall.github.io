@@ -1,56 +1,42 @@
 ---
 import TerminalText from '../components/TerminalText.astro';
-import TerminalWindow from '../components/TerminalWindow.astro';
 import Layout from '../layouts/Layout.astro';
 import { socialLinks, siteMeta } from '../lib/site.ts';
 ---
 
 <Layout title="Contact" description={`Get in touch with ${siteMeta.name}.`}>
-  <div class="shell-container terminal-page">
-    <section class="terminal-section">
+  <div class="shell-container page-shell">
+    <section class="hero-block hero-block--page">
+      <p class="eyebrow">Contact</p>
       <TerminalText
         as="h1"
-        text="Open a channel"
-        eyebrow="contact"
-        variant="hero"
+        text="If the work sounds relevant, reach out."
+        variant="section"
       />
       <p class="page-copy">
         I’m happy to talk about engineering problems, collaboration ideas, open source, or interesting things happening in Python and backend development.
       </p>
     </section>
 
-    <section class="signal-grid">
-      {socialLinks.map((link) => (
-        <a
-          href={link.href}
-          class="terminal-window terminal-window--link"
-          target={link.href.startsWith('http') ? '_blank' : undefined}
-          rel="noopener noreferrer"
-        >
-          <div class="terminal-window__bar">
-            <div class="terminal-window__lights" aria-hidden="true">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <p class="terminal-window__title">{link.label.toLowerCase()}</p>
-            <p class="terminal-window__command">connect</p>
-          </div>
-          <div class="terminal-window__body">
-            <p class="terminal-label">{link.value}</p>
-            <p>open the channel</p>
-          </div>
-        </a>
-      ))}
+    <section class="content-section">
+      <div class="simple-grid">
+        {socialLinks.map((link) => (
+          <a href={link.href} class="simple-card simple-card--link" target={link.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
+            <p class="card-kicker">{link.label}</p>
+            <h2>{link.value}</h2>
+            <p>Open the channel</p>
+          </a>
+        ))}
 
-      <TerminalWindow title="fit-check.txt" command="cat reasons_to_write">
-        <p class="terminal-label">Good reasons to write</p>
-        <ul class="signal-list">
-          <li>Backend engineering discussions and practical Python work</li>
-          <li>Open source collaboration or technical writing ideas</li>
-          <li>Interesting problems involving systems, protocols, or tooling</li>
-        </ul>
-      </TerminalWindow>
+        <article class="simple-card">
+          <h2>Good reasons to write</h2>
+          <ul class="plain-list">
+            <li>Backend engineering discussions and practical Python work</li>
+            <li>Open source collaboration or technical writing ideas</li>
+            <li>Interesting problems involving systems, protocols, or tooling</li>
+          </ul>
+        </article>
+      </div>
     </section>
   </div>
 </Layout>

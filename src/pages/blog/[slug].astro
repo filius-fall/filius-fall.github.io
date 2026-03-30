@@ -1,6 +1,5 @@
 ---
 import TerminalText from '../../components/TerminalText.astro';
-import TerminalWindow from '../../components/TerminalWindow.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 import { estimateReadingTime, formatDate, withBase } from '../../lib/site.ts';
@@ -14,51 +13,31 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content, headings } = await render(post);
+const { Content } = await render(post);
 ---
 
-<Layout 
-  title={post.data.title} 
+<Layout
+  title={post.data.title}
   description={post.data.description || `Read ${post.data.title} on Sreeram Ambalam's blog.`}
 >
-  <div class="shell-container terminal-page">
-    <div class="article-layout">
-      <article class="article-shell">
-        <TerminalWindow title="article-view" command={`open ${post.id}`}>
-          <header class="article-header">
-            <a href={withBase('/blog/')} class="article-back">cd .. / archive</a>
-            <div class="article-header__meta">
-              <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-              <span>{estimateReadingTime(post.body)}</span>
-              {post.data.categories?.map((category) => (
-                <span class="chip">{category}</span>
-              ))}
-            </div>
-            <TerminalText as="h1" text={post.data.title} eyebrow="entry" variant="section" />
-            {post.data.description && <p class="article-summary">{post.data.description}</p>}
-          </header>
+  <div class="shell-container page-shell">
+    <article class="article-shell">
+      <header class="article-header">
+        <a href={withBase('/blog/')} class="article-back">Back to writing</a>
+        <div class="article-header__meta">
+          <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+          <span>{estimateReadingTime(post.body)}</span>
+          {post.data.categories?.map((category) => (
+            <span class="chip">{category}</span>
+          ))}
+        </div>
+        <TerminalText as="h1" text={post.data.title} variant="section" />
+        {post.data.description && <p class="article-summary">{post.data.description}</p>}
+      </header>
 
-          <div class="prose">
-            <Content />
-          </div>
-        </TerminalWindow>
-      </article>
-
-      {headings.length > 0 && (
-        <aside class="article-sidebar">
-          <TerminalWindow title="table-of-contents" command="ls headings" class="toc-shell">
-            <nav class="toc-nav" aria-label="Table of contents">
-              {headings
-                .filter((heading) => heading.depth <= 3)
-                .map((heading) => (
-                  <a href={`#${heading.slug}`} class:list={['toc-nav__link', `depth-${heading.depth}`]}>
-                    {heading.text}
-                  </a>
-                ))}
-            </nav>
-          </TerminalWindow>
-        </aside>
-      )}
-    </div>
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
   </div>
 </Layout>

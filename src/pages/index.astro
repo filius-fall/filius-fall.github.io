@@ -1,8 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import avatar from '../../assets/img/avatar.jpg';
 import TerminalText from '../components/TerminalText.astro';
-import TerminalWindow from '../components/TerminalWindow.astro';
 import Layout from '../layouts/Layout.astro';
 import { capabilityCards, estimateReadingTime, formatDate, homepageSections, siteMeta, withBase } from '../lib/site.ts';
 
@@ -13,80 +11,50 @@ const recentPosts = posts
 ---
 
 <Layout title="Home" description={`${siteMeta.name} is a Python developer writing about systems, software, and open source.`}>
-  <div class="shell-container terminal-page">
-    <section class="hero-grid">
-      <TerminalWindow title="identity.sys" command="cat profile.txt" class="hero-shell">
-        <TerminalText
-          as="h1"
-          text={siteMeta.name}
-          eyebrow="portfolio // writing // systems"
-          variant="hero"
-        />
-
-        <p class="hero-copy hero-copy--lead">{siteMeta.role}</p>
-        <p class="hero-copy">{homepageSections.intro}</p>
-
-        <div class="hero-command-row">
-          <a href={withBase('/blog/')} class="button">open writing</a>
-          <a href={withBase('/about/')} class="button button--secondary">inspect about</a>
-          <a href={withBase('/resume/')} class="button button--ghost">download resume</a>
-        </div>
-
-        <div class="status-strip">
-          <span>location: {siteMeta.location}</span>
-          <span>mode: available for practical engineering work</span>
-          <span>handle: filius-fall</span>
-        </div>
-      </TerminalWindow>
-
-      <div class="hero-side">
-        <TerminalWindow title="snapshot.png" command="display avatar" class="visual-shell">
-          <div class="portrait-frame">
-            <img src={avatar.src} alt={`${siteMeta.name} portrait`} />
-          </div>
-        </TerminalWindow>
-
-        <TerminalWindow title="focus.log" command="tail -f current_focus" class="compact-window">
-          <ul class="signal-list">
-            {homepageSections.currentFocus.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        </TerminalWindow>
+  <div class="shell-container page-shell">
+    <section class="hero-block">
+      <p class="eyebrow">Portfolio, writing, systems</p>
+      <TerminalText
+        as="h1"
+        text={siteMeta.name}
+        variant="hero"
+        split="words"
+      />
+      <p class="hero-copy hero-copy--lead">{siteMeta.role}</p>
+      <p class="hero-copy">{homepageSections.intro}</p>
+      <div class="inline-links">
+        <a href={withBase('/blog/')} class="button">Read the writing</a>
+        <a href={withBase('/about/')} class="button button--ghost">About</a>
+        <a href={withBase('/resume/')} class="button button--ghost">Resume</a>
+      </div>
+      <div class="meta-row">
+        <span>{siteMeta.location}</span>
+        <span>Available for practical engineering work</span>
+        <span>GitHub: filius-fall</span>
       </div>
     </section>
 
-    <section class="terminal-section">
-      <div class="section-lead">
-        <TerminalText
-          as="h2"
-          text="What the stack looks like from here"
-          eyebrow="capabilities"
-          variant="section"
-        />
+    <section class="content-section">
+      <div class="section-intro">
+        <TerminalText as="h2" text="What I bring" variant="section" />
         <p>
           Backend reliability, tools that earn their keep, and writing that turns vague implementation talk into something concrete.
         </p>
       </div>
 
-      <div class="signal-grid">
-        {capabilityCards.map((card, index) => (
-          <TerminalWindow title={`service-0${index + 1}.md`} command="read capability" class="signal-card">
-            <p class="terminal-label">{card.title}</p>
+      <div class="simple-grid">
+        {capabilityCards.map((card) => (
+          <article class="simple-card">
+            <h3>{card.title}</h3>
             <p>{card.description}</p>
-          </TerminalWindow>
+          </article>
         ))}
       </div>
     </section>
 
-    <section class="terminal-section">
-      <div class="section-lead">
-        <TerminalText
-          as="h2"
-          text="Recent writing from the edge of the stack"
-          eyebrow={homepageSections.recentWritingTitle.toLowerCase()}
-          variant="section"
-        />
+    <section class="content-section">
+      <div class="section-intro">
+        <TerminalText as="h2" text="Recent writing" variant="section" />
         <p>
           Protocols, streaming, transport, and the implementation details that decide whether systems stay calm or turn noisy.
         </p>
@@ -103,11 +71,22 @@ const recentPosts = posts
             <h3>{post.data.title}</h3>
             {post.data.description && <p>{post.data.description}</p>}
             <a href={withBase(`/blog/${post.id.replace('.md', '')}/`)} class="archive-entry__link">
-              read article
+              Read article
             </a>
           </article>
         ))}
       </div>
+    </section>
+
+    <section class="content-section content-section--compact">
+      <div class="section-intro">
+        <h2>Current focus</h2>
+      </div>
+      <ul class="plain-list">
+        {homepageSections.currentFocus.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
     </section>
   </div>
 </Layout>
