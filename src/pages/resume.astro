@@ -1,49 +1,52 @@
 ---
+import TerminalText from '../components/TerminalText.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
 import Layout from '../layouts/Layout.astro';
 import { siteMeta, withBase } from '../lib/site.ts';
 ---
 
 <Layout title="Resume" description={`${siteMeta.name}'s experience, strengths, and resume.`}>
-  <div class="shell-container page-shell">
-    <div class="page-intro">
-      <p class="eyebrow">Resume</p>
-      <h1>Python-first engineering with a bias toward reliability, readability, and systems thinking.</h1>
-      <p>
-        I work best on software that benefits from clear abstractions, careful implementation, and someone willing to understand how the whole stack fits together.
+  <div class="shell-container terminal-page">
+    <section class="terminal-section">
+      <TerminalText
+        as="h1"
+        text="Resume / capability dump"
+        eyebrow="resume"
+        variant="hero"
+      />
+      <p class="page-copy">
+        Python-first engineering with a bias toward reliability, readability, and systems thinking.
       </p>
-      <div class="hero__cta">
+      <div class="hero-command-row">
         <a href={withBase(`/${siteMeta.resumeFile}`)} download class="button">
-          Download PDF resume
+          download pdf resume
         </a>
       </div>
-    </div>
+    </section>
 
-    <section class="resume-grid">
-      <article class="resume-card">
-        <p class="eyebrow">Strengths</p>
-        <h3>Core capabilities</h3>
-        <ul class="resume-list">
+    <section class="signal-grid">
+      <TerminalWindow title="strengths.md" command="read capabilities">
+        <p class="terminal-label">Core capabilities</p>
+        <ul class="signal-list">
           <li>Python development for applications, automation, and backend services</li>
           <li>JavaScript and TypeScript for product surfaces and tooling</li>
           <li>REST APIs, scripting, Git workflows, and Linux-based development</li>
           <li>Explaining technical systems clearly in writing</li>
         </ul>
-      </article>
+      </TerminalWindow>
 
-      <article class="resume-card">
-        <p class="eyebrow">Ways of working</p>
-        <h3>What you can expect</h3>
-        <ul class="resume-list">
+      <TerminalWindow title="workflow.md" command="read expectations">
+        <p class="terminal-label">What you can expect</p>
+        <ul class="signal-list">
           <li>Clean implementation with attention to maintainability</li>
           <li>Comfort debugging behavior across layers, not just symptoms</li>
           <li>Bias toward pragmatic solutions instead of decorative complexity</li>
           <li>Curiosity around systems, protocols, and developer experience</li>
         </ul>
-      </article>
+      </TerminalWindow>
 
-      <article class="resume-card">
-        <p class="eyebrow">Technical stack</p>
-        <h3>Tools I reach for</h3>
+      <TerminalWindow title="toolbox.json" command="cat stack">
+        <p class="terminal-label">Tools I reach for</p>
         <div class="chip-row">
           <span class="chip">Python</span>
           <span class="chip">TypeScript</span>
@@ -54,18 +57,17 @@ import { siteMeta, withBase } from '../lib/site.ts';
           <span class="chip">Git</span>
           <span class="chip">REST APIs</span>
         </div>
-      </article>
+      </TerminalWindow>
 
-      <article class="resume-card">
-        <p class="eyebrow">Contact</p>
-        <h3>Reach me directly</h3>
-        <ul class="resume-list">
+      <TerminalWindow title="contact.env" command="printenv CONTACT">
+        <p class="terminal-label">Reach me directly</p>
+        <ul class="signal-list">
           <li>{siteMeta.email}</li>
           <li>github.com/filius-fall</li>
           <li>@filius_fall</li>
           <li>{siteMeta.location}</li>
         </ul>
-      </article>
+      </TerminalWindow>
     </section>
   </div>
 </Layout>

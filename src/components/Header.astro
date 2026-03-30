@@ -9,8 +9,8 @@ const normalize = (value: string) => value.replace(/\/+$/, '') || '/';
   <div class="shell-container">
     <div class="site-header__inner">
       <a href={withBase('/')} class="site-brand" aria-label={`Go to ${siteMeta.name} homepage`}>
-        <span class="site-brand__name">{siteMeta.name}</span>
-        <span class="site-brand__meta">{siteMeta.location}</span>
+        <span class="site-brand__prompt">visitor@sreeram:~$</span>
+        <span class="site-brand__name">{siteMeta.shortName.toLowerCase()} --site</span>
       </a>
 
       <nav class="site-nav" aria-label="Primary navigation">
@@ -27,7 +27,7 @@ const normalize = (value: string) => value.replace(/\/+$/, '') || '/';
       </nav>
 
       <a href={withBase('/contact/')} class="site-header__cta">
-        Say hello
+        open contact
       </a>
 
       <details class="mobile-nav">
@@ -37,7 +37,7 @@ const normalize = (value: string) => value.replace(/\/+$/, '') || '/';
           <span></span>
         </summary>
         <div class="mobile-nav__panel">
-          <p class="mobile-nav__eyebrow">Navigate</p>
+          <p class="mobile-nav__eyebrow">navigation</p>
           <div class="mobile-nav__links">
             {navigation.map((item) => {
               const href = withBase(item.href);

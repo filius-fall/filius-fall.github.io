@@ -32,15 +32,17 @@ const { title, description = `${siteMeta.name} builds dependable software, write
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Instrument+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
     <div class="site-shell">
-      <div class="site-shell__glow site-shell__glow--top"></div>
-      <div class="site-shell__glow site-shell__glow--bottom"></div>
-      <div class="site-shell__grid"></div>
+      <div class="site-shell__noise" aria-hidden="true"></div>
+      <div class="site-shell__scanlines" aria-hidden="true"></div>
+      <div class="site-shell__grid" aria-hidden="true"></div>
+      <div class="site-shell__orb site-shell__orb--north" aria-hidden="true"></div>
+      <div class="site-shell__orb site-shell__orb--south" aria-hidden="true"></div>
       <Header />
       <main class="site-main">
         <slot />

@@ -1,46 +1,81 @@
 ---
 import { getCollection } from 'astro:content';
+import TerminalText from '../../components/TerminalText.astro';
+import TerminalWindow from '../../components/TerminalWindow.astro';
 import Layout from '../../layouts/Layout.astro';
-import { siteMeta, withBase } from '../../lib/site.ts';
+import { estimateReadingTime, formatDate, siteMeta, withBase } from '../../lib/site.ts';
 
 const blog = await getCollection('blog');
 const sortedBlog = blog.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const [featuredPost, ...archivePosts] = sortedBlog;
 ---
 
 <Layout title="Writing" description={`Technical writing and notes from ${siteMeta.name}.`}>
-  <div class="shell-container page-shell">
-    <div class="page-intro">
-      <p class="eyebrow">Writing</p>
-      <h1>Notes on systems, protocols, software behavior, and the parts worth understanding properly.</h1>
-      <p>
-        Articles are written to be useful first: clear enough for learning, technical enough to reward rereading.
+  <div class="shell-container terminal-page">
+    <section class="terminal-section">
+      <TerminalText
+        as="h1"
+        text="Archive Terminal"
+        eyebrow="writing index"
+        variant="hero"
+      />
+      <p class="page-copy">
+        Notes on systems, protocols, software behavior, and the parts worth understanding properly. Built as an archive first, not a content dump.
       </p>
-    </div>
+      <div class="status-strip">
+        <span>entries: {sortedBlog.length}</span>
+        <span>focus: systems / protocols / software behavior</span>
+        <span>sort: newest first</span>
+      </div>
+    </section>
 
-    <section class="blog-grid">
-      {sortedBlog.map((post) => (
-        <article class="blog-card">
-          <div class="blog-card__meta">
-            <time datetime={post.data.pubDate.toISOString()}>
-              {post.data.pubDate.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </time>
-          </div>
-          <h3>{post.data.title}</h3>
-          {post.data.description && <p>{post.data.description}</p>}
-          <div class="chip-row">
-            {post.data.categories?.map((category) => (
-              <span class="chip">{category}</span>
-            ))}
-          </div>
-          <a href={withBase(`/blog/${post.id.replace('.md', '')}/`)} class="button button--ghost">
-            Read article
-          </a>
-        </article>
-      ))}
+    {featuredPost && (
+      <TerminalWindow title="featured-entry" command="open latest_post" class="featured-post">
+        <div class="featured-post__meta">
+          <span>{formatDate(featuredPost.data.pubDate)}</span>
+          <span>{estimateReadingTime(featuredPost.body)}</span>
+          <span>{featuredPost.data.categories?.join(' / ')}</span>
+        </div>
+        <h2>{featuredPost.data.title}</h2>
+        {featuredPost.data.description && <p>{featuredPost.data.description}</p>}
+        <a href={withBase(`/blog/${featuredPost.id.replace('.md', '')}/`)} class="button">
+          read featured post
+        </a>
+      </TerminalWindow>
+    )}
+
+    <section class="terminal-section">
+      <div class="section-lead section-lead--split">
+        <TerminalText
+          as="h2"
+          text="Full Archive"
+          eyebrow="all posts"
+          variant="section"
+        />
+        <p class="page-copy">
+          Each entry keeps the metadata visible so browsing feels like working through a real archive instead of opening random cards.
+        </p>
+      </div>
+
+      <div class="archive-list archive-list--dense">
+        {archivePosts.map((post, index) => (
+          <article class="archive-entry archive-entry--dense">
+            <div class="archive-entry__index">0{index + 1}</div>
+            <div class="archive-entry__body">
+              <div class="archive-entry__meta">
+                <span>{formatDate(post.data.pubDate)}</span>
+                <span>{estimateReadingTime(post.body)}</span>
+                <span>{post.data.categories?.join(' / ')}</span>
+              </div>
+              <h3>{post.data.title}</h3>
+              {post.data.description && <p>{post.data.description}</p>}
+            </div>
+            <a href={withBase(`/blog/${post.id.replace('.md', '')}/`)} class="archive-entry__link">
+              open
+            </a>
+          </article>
+        ))}
+      </div>
     </section>
   </div>
 </Layout>

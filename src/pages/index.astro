@@ -1,9 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import avatar from '../../assets/img/avatar.jpg';
-import PretextName from '../components/PretextName.astro';
+import TerminalText from '../components/TerminalText.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
 import Layout from '../layouts/Layout.astro';
-import { capabilityCards, homepageSections, siteMeta, withBase } from '../lib/site.ts';
+import { capabilityCards, estimateReadingTime, formatDate, homepageSections, siteMeta, withBase } from '../lib/site.ts';
 
 const posts = await getCollection('blog');
 const recentPosts = posts
@@ -12,97 +13,97 @@ const recentPosts = posts
 ---
 
 <Layout title="Home" description={`${siteMeta.name} is a Python developer writing about systems, software, and open source.`}>
-  <div class="shell-container page-shell">
-    <section class="hero">
-      <div class="hero__content panel">
-        <PretextName name={siteMeta.name} eyebrow="Portfolio, writing, and systems curiosity" />
+  <div class="shell-container terminal-page">
+    <section class="hero-grid">
+      <TerminalWindow title="identity.sys" command="cat profile.txt" class="hero-shell">
+        <TerminalText
+          as="h1"
+          text={siteMeta.name}
+          eyebrow="portfolio // writing // systems"
+          variant="hero"
+        />
 
-        <p class="hero__lead">
-          {siteMeta.role}
-        </p>
+        <p class="hero-copy hero-copy--lead">{siteMeta.role}</p>
+        <p class="hero-copy">{homepageSections.intro}</p>
 
-        <p class="hero__lead">
-          {homepageSections.intro}
-        </p>
-
-        <div class="hero__cta">
-          <a href={withBase('/blog/')} class="button">Read the writing</a>
-          <a href={withBase('/about/')} class="button button--secondary">About the work</a>
-          <a href={withBase('/resume/')} class="button button--ghost">Open resume</a>
+        <div class="hero-command-row">
+          <a href={withBase('/blog/')} class="button">open writing</a>
+          <a href={withBase('/about/')} class="button button--secondary">inspect about</a>
+          <a href={withBase('/resume/')} class="button button--ghost">download resume</a>
         </div>
 
-        <div class="hero__meta">
-          <span>{siteMeta.location}</span>
-          <span>Open to practical engineering conversations</span>
-          <span>GitHub: filius-fall</span>
+        <div class="status-strip">
+          <span>location: {siteMeta.location}</span>
+          <span>mode: available for practical engineering work</span>
+          <span>handle: filius-fall</span>
         </div>
-      </div>
+      </TerminalWindow>
 
-      <aside class="hero__aside">
-        <div class="hero__portrait panel">
-          <img src={avatar.src} alt={`${siteMeta.name} portrait`} />
-        </div>
+      <div class="hero-side">
+        <TerminalWindow title="snapshot.png" command="display avatar" class="visual-shell">
+          <div class="portrait-frame">
+            <img src={avatar.src} alt={`${siteMeta.name} portrait`} />
+          </div>
+        </TerminalWindow>
 
-        <div class="content-panel hero__card">
-          <p class="eyebrow">Current focus</p>
-          <ul class="focus-list">
+        <TerminalWindow title="focus.log" command="tail -f current_focus" class="compact-window">
+          <ul class="signal-list">
             {homepageSections.currentFocus.map((item) => (
               <li>{item}</li>
             ))}
           </ul>
-        </div>
-      </aside>
+        </TerminalWindow>
+      </div>
     </section>
 
-    <section class="section-stack">
-      <div class="section-heading">
-        <p class="eyebrow">What I bring</p>
-        <h2>Practical engineering with a systems bias.</h2>
+    <section class="terminal-section">
+      <div class="section-lead">
+        <TerminalText
+          as="h2"
+          text="What the stack looks like from here"
+          eyebrow="capabilities"
+          variant="section"
+        />
         <p>
-          I like work that rewards clarity: robust backend code, sharp debugging, and writing that makes technical tradeoffs easier to see.
+          Backend reliability, tools that earn their keep, and writing that turns vague implementation talk into something concrete.
         </p>
       </div>
 
-      <div class="capability-grid">
-        {capabilityCards.map((card) => (
-          <article class="capability-card">
-            <h3>{card.title}</h3>
+      <div class="signal-grid">
+        {capabilityCards.map((card, index) => (
+          <TerminalWindow title={`service-0${index + 1}.md`} command="read capability" class="signal-card">
+            <p class="terminal-label">{card.title}</p>
             <p>{card.description}</p>
-          </article>
+          </TerminalWindow>
         ))}
       </div>
     </section>
 
-    <section class="section-stack">
-      <div class="section-heading">
-        <p class="eyebrow">{homepageSections.recentWritingTitle}</p>
-        <h2>Essays and technical notes from the edges of the stack.</h2>
+    <section class="terminal-section">
+      <div class="section-lead">
+        <TerminalText
+          as="h2"
+          text="Recent writing from the edge of the stack"
+          eyebrow={homepageSections.recentWritingTitle.toLowerCase()}
+          variant="section"
+        />
         <p>
-          Mostly networking, protocols, software architecture, and the details that change how systems actually behave.
+          Protocols, streaming, transport, and the implementation details that decide whether systems stay calm or turn noisy.
         </p>
       </div>
 
-      <div class="blog-grid">
+      <div class="archive-list">
         {recentPosts.map((post) => (
-          <article class="blog-card">
-            <div class="blog-card__meta">
-              <time datetime={post.data.pubDate.toISOString()}>
-                {post.data.pubDate.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </time>
+          <article class="archive-entry">
+            <div class="archive-entry__meta">
+              <span>{formatDate(post.data.pubDate)}</span>
+              <span>{estimateReadingTime(post.body)}</span>
+              <span>{post.data.categories?.join(' / ')}</span>
             </div>
             <h3>{post.data.title}</h3>
             {post.data.description && <p>{post.data.description}</p>}
-            <div class="chip-row">
-              {post.data.categories?.map((category) => (
-                <span class="chip">{category}</span>
-              ))}
-            </div>
-            <a href={withBase(`/blog/${post.id.replace('.md', '')}/`)} class="button button--ghost">
-              Read article
+            <a href={withBase(`/blog/${post.id.replace('.md', '')}/`)} class="archive-entry__link">
+              read article
             </a>
           </article>
         ))}

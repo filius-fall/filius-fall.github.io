@@ -1,0 +1,158 @@
+---
+interface Props {
+  text: string;
+  as?: keyof HTMLElementTagNameMap;
+  eyebrow?: string;
+  variant?: 'hero' | 'section' | 'label';
+  compact?: boolean;
+}
+
+const {
+  text,
+  as = 'h1',
+  eyebrow,
+  variant = 'section',
+  compact = false,
+} = Astro.props;
+
+const Tag = as;
+---
+
+<div
+  class:list={[
+    'terminal-text',
+    `terminal-text--${variant}`,
+    compact && 'terminal-text--compact',
+  ]}
+  data-terminal-text-root
+  data-text={text}
+>
+  {eyebrow && <p class="terminal-text__eyebrow">{eyebrow}</p>}
+  <Tag class="terminal-text__canvas" data-terminal-text-canvas>
+    <span class="terminal-text__fallback" data-terminal-text-fallback>{text}</span>
+  </Tag>
+</div>
+
+<script>
+  import { layoutWithLines, prepareWithSegments, walkLineRanges } from '../../node_modules/@chenglou/pretext/src/layout.ts';
+
+  const roots = document.querySelectorAll('[data-terminal-text-root]');
+
+  roots.forEach((root) => {
+    if (!(root instanceof HTMLElement) || root.dataset.pretextBound === 'true') {
+      return;
+    }
+
+    root.dataset.pretextBound = 'true';
+
+    const canvas = root.querySelector('[data-terminal-text-canvas]');
+    const fallback = root.querySelector('[data-terminal-text-fallback]');
+
+    if (!(canvas instanceof HTMLElement) || !(fallback instanceof HTMLElement)) {
+      return;
+    }
+
+    const sourceText = (root.getAttribute('data-text') || '').trim();
+    if (!sourceText) {
+      return;
+    }
+
+    let prepared = null;
+    let lineHeight = 0;
+    let availableWidth = 0;
+    let lastSignature = '';
+
+    const graphemeSegmenter = typeof Intl !== 'undefined' && 'Segmenter' in Intl
+      ? new Intl.Segmenter(undefined, { granularity: 'grapheme' })
+      : null;
+
+    const splitGraphemes = (value) => {
+      if (!value) return [];
+      if (graphemeSegmenter) {
+        return Array.from(graphemeSegmenter.segment(value), (entry) => entry.segment);
+      }
+      return Array.from(value);
+    };
+
+    const getFontDefinition = () => {
+      const styles = window.getComputedStyle(fallback);
+      const fontStyle = styles.fontStyle || 'normal';
+      const fontWeight = styles.fontWeight || '700';
+      const fontSize = styles.fontSize || '64px';
+      const fontFamily = styles.fontFamily || '"IBM Plex Mono", monospace';
+
+      return {
+        font: `${fontStyle} ${fontWeight} ${fontSize} ${fontFamily}`,
+        lineHeight: parseFloat(styles.lineHeight) || parseFloat(fontSize) * 1.02,
+      };
+    };
+
+    const drawLayout = (width) => {
+      const count = walkLineRanges(prepared, width, () => {});
+      const layoutWidth = count <= 2 ? width : availableWidth;
+      const layout = layoutWithLines(prepared, layoutWidth, lineHeight);
+      const signature = layout.lines.map((line) => line.text).join('|');
+
+      if (signature === lastSignature) {
+        return;
+      }
+
+      lastSignature = signature;
+      canvas.innerHTML = '';
+
+      let letterIndex = 0;
+
+      layout.lines.forEach((line, index) => {
+        const row = document.createElement('span');
+        row.className = 'terminal-text__line';
+        row.style.setProperty('--line-index', `${index}`);
+
+        splitGraphemes(line.text).forEach((grapheme) => {
+          const letter = document.createElement('span');
+          letter.className = 'terminal-text__letter';
+          letter.style.setProperty('--letter-index', `${letterIndex}`);
+          letter.textContent = grapheme === ' ' ? '\u00A0' : grapheme;
+          row.appendChild(letter);
+          letterIndex += 1;
+        });
+
+        canvas.appendChild(row);
+      });
+    };
+
+    const render = (force = false) => {
+      const nextAvailableWidth = Math.max(Math.floor(root.clientWidth), 180);
+      if (!force && Math.abs(nextAvailableWidth - availableWidth) < 4 && prepared) {
+        return;
+      }
+
+      availableWidth = nextAvailableWidth;
+      const fontDefinition = getFontDefinition();
+      lineHeight = fontDefinition.lineHeight;
+      prepared = prepareWithSegments(sourceText, fontDefinition.font, { whiteSpace: 'pre-wrap' });
+      lastSignature = '';
+
+      canvas.classList.remove('is-ready');
+      drawLayout(availableWidth);
+
+      window.requestAnimationFrame(() => {
+        canvas.classList.add('is-ready');
+      });
+    };
+
+    const scheduleRender = () => {
+      window.requestAnimationFrame(() => render());
+    };
+
+    const observer = new ResizeObserver(scheduleRender);
+    observer.observe(root);
+
+    if ('fonts' in document) {
+      document.fonts.ready.then(() => render(true));
+    } else {
+      render(true);
+    }
+
+    window.addEventListener('pageshow', scheduleRender);
+  });
+</script>
