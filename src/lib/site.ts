@@ -12,7 +12,7 @@ export type SocialLink = {
 export const siteMeta = {
   name: 'Sreeram Ambalam',
   shortName: 'Sreeram',
-  role: 'Python developer building dependable systems, thoughtful interfaces, and clear technical writing.',
+  role: 'Python developer focused on backend systems, tooling, and technical writing.',
   location: 'Bengaluru, India',
   email: 'asreeram1729@gmail.com',
   github: 'https://github.com/filius-fall',
@@ -37,24 +37,24 @@ export const socialLinks: SocialLink[] = [
 export const capabilityCards = [
   {
     title: 'Backend systems',
-    description: 'Python-first application work, APIs, automation, and the kind of implementation detail that keeps software calm under load.',
+    description: 'Python services, APIs, automation, and reliability-focused implementation.',
   },
   {
-    title: 'Open source curiosity',
-    description: 'I like reading code, understanding design tradeoffs, and contributing to tools that make developers more effective.',
+    title: 'Developer tooling',
+    description: 'Tooling, workflows, and practical improvements to developer experience.',
   },
   {
     title: 'Technical writing',
-    description: 'I write to make difficult systems easier to reason about, especially where protocols, networking, and architecture get fuzzy.',
+    description: 'Clear writing on protocols, systems, and software behavior.',
   },
 ];
 
 export const homepageSections = {
-  intro: 'I care about software that is practical, readable, and built with enough rigor to stay useful after the first demo.',
+  intro: 'I build practical software and write about how systems actually behave.',
   currentFocus: [
     'Python services and automation',
-    'Developer tooling and open source',
-    'Networking, systems, and protocol deep dives',
+    'Developer tooling',
+    'Protocols and system behavior',
   ],
   recentWritingTitle: 'Recent blog posts',
 };
