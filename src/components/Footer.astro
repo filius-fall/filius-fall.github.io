@@ -1,0 +1,39 @@
+---
+import { siteMeta, socialLinks, withBase } from '../lib/site.ts';
+---
+
+<footer class="site-footer">
+  <div class="shell-container site-footer__inner">
+    <div class="site-footer__intro">
+      <p class="eyebrow">Built for the long run</p>
+      <h2>{siteMeta.name}</h2>
+      <p>
+        Personal site for notes on engineering, systems, and the work of making software feel deliberate.
+      </p>
+    </div>
+
+    <div class="site-footer__links">
+      <div>
+        <p class="site-footer__label">Explore</p>
+        <a href={withBase('/about/')}>About</a>
+        <a href={withBase('/blog/')}>Writing</a>
+        <a href={withBase('/resume/')}>Resume</a>
+      </div>
+      <div>
+        <p class="site-footer__label">Connect</p>
+        {socialLinks.map((link) => (
+          <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="site-footer__meta">
+      <a class="button button--ghost" href={`mailto:${siteMeta.email}`}>
+        Start a conversation
+      </a>
+      <p>© 2026 {siteMeta.name}. Built with Astro and a bit more taste.</p>
+    </div>
+  </div>
+</footer>

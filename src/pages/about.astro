@@ -1,0 +1,57 @@
+---
+import avatar from '../../assets/img/avatar.jpg';
+import Layout from '../layouts/Layout.astro';
+import { siteMeta } from '../lib/site.ts';
+---
+
+<Layout title="About" description={`About ${siteMeta.name}, a Python developer with a strong interest in systems, tools, and open source.`}>
+  <div class="shell-container page-shell">
+    <div class="page-intro">
+      <p class="eyebrow">About</p>
+      <h1>I build with Python, write to clarify ideas, and keep following the systems underneath the interface.</h1>
+      <p>
+        I’m based in Bengaluru and drawn to work that combines implementation detail with clean explanation. That usually means backend services, automation, open source tooling, and technical writing that turns hand-wavy concepts into something concrete.
+      </p>
+    </div>
+
+    <section class="info-grid">
+      <article class="content-panel">
+        <h3>How I think about software</h3>
+        <p>
+          Good software feels calm. It has enough structure to stay readable, enough rigor to survive change, and enough restraint not to hide complexity behind decoration.
+        </p>
+        <p>
+          I care about maintainable code, debugging the real source of a problem, and understanding why a system behaves the way it does instead of just patching symptoms.
+        </p>
+      </article>
+
+      <div class="hero__portrait panel">
+        <img src={avatar.src} alt={`${siteMeta.name} portrait`} />
+      </div>
+    </section>
+
+    <section class="info-grid">
+      <article class="content-panel">
+        <p class="eyebrow">What I enjoy</p>
+        <h3>Technical interests</h3>
+        <ul class="resume-list">
+          <li>Python applications, APIs, and automation tooling</li>
+          <li>Networking, protocols, and system behavior under real constraints</li>
+          <li>Open source projects that teach good engineering taste</li>
+          <li>Writing that makes backend concepts easier to grasp</li>
+        </ul>
+      </article>
+
+      <article class="content-panel">
+        <p class="eyebrow">Outside work</p>
+        <h3>What keeps me curious</h3>
+        <p>
+          I read manga, keep an eye on emerging tools, and spend an unreasonable amount of time following implementation details that most people happily ignore.
+        </p>
+        <p>
+          This site is where those threads meet: personal portfolio, technical notebook, and a place to document what I’m learning.
+        </p>
+      </article>
+    </section>
+  </div>
+</Layout>

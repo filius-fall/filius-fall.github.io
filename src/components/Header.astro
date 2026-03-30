@@ -1,0 +1,60 @@
+---
+import { navigation, siteMeta, withBase } from '../lib/site.ts';
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const normalize = (value: string) => value.replace(/\/+$/, '') || '/';
+---
+
+<header class="site-header">
+  <div class="shell-container">
+    <div class="site-header__inner">
+      <a href={withBase('/')} class="site-brand" aria-label={`Go to ${siteMeta.name} homepage`}>
+        <span class="site-brand__name">{siteMeta.name}</span>
+        <span class="site-brand__meta">{siteMeta.location}</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        {navigation.map((item) => {
+          const href = withBase(item.href);
+          const active = normalize(href) === currentPath;
+
+          return (
+            <a href={href} class:list={['site-nav__link', active && 'is-active']}>
+              {item.label}
+            </a>
+          );
+        })}
+      </nav>
+
+      <a href={withBase('/contact/')} class="site-header__cta">
+        Say hello
+      </a>
+
+      <details class="mobile-nav">
+        <summary aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </summary>
+        <div class="mobile-nav__panel">
+          <p class="mobile-nav__eyebrow">Navigate</p>
+          <div class="mobile-nav__links">
+            {navigation.map((item) => {
+              const href = withBase(item.href);
+              const active = normalize(href) === currentPath;
+
+              return (
+                <a href={href} class:list={['mobile-nav__link', active && 'is-active']}>
+                  {item.label}
+                </a>
+              );
+            })}
+          </div>
+          <a href={`mailto:${siteMeta.email}`} class="mobile-nav__contact">
+            {siteMeta.email}
+          </a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>

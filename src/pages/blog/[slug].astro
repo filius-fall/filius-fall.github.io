@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import { withBase } from '../../lib/site.ts';
+
+export async function getStaticPaths() {
+  const blog = await getCollection('blog');
+  return blog.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout 
+  title={post.data.title} 
+  description={post.data.description || `Read ${post.data.title} on Sreeram Ambalam's blog.`}
+>
+  <div class="shell-container">
+    <article class="article-shell">
+      <header class="article-header">
+        <a href={withBase('/blog/')} class="article-back">← Back to all posts</a>
+        <div class="article-header__meta">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {post.data.pubDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        </time>
+        {post.data.categories && post.data.categories.length > 0 && (
+          <div class="chip-row">
+            {post.data.categories.map((category) => (
+              <span class="chip">
+                {category}
+              </span>
+            ))}
+          </div>
+        )}
+        </div>
+        <h1>{post.data.title}</h1>
+        {post.data.description && (
+          <p>{post.data.description}</p>
+        )}
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+  </div>
+</Layout>

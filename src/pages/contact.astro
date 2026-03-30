@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { socialLinks, siteMeta } from '../lib/site.ts';
+---
+
+<Layout title="Contact" description={`Get in touch with ${siteMeta.name}.`}>
+  <div class="shell-container page-shell">
+    <div class="page-intro">
+      <p class="eyebrow">Contact</p>
+      <h1>If the work sounds relevant, reach out.</h1>
+      <p>
+        I’m happy to talk about engineering problems, collaboration ideas, open source, or interesting things happening in Python and backend development.
+      </p>
+    </div>
+
+    <section class="contact-grid">
+      {socialLinks.map((link) => (
+        <a
+          href={link.href}
+          class="contact-card"
+          target={link.href.startsWith('http') ? '_blank' : undefined}
+          rel="noopener noreferrer"
+        >
+          <p class="eyebrow">{link.label}</p>
+          <h3>{link.value}</h3>
+          <p>Open the channel</p>
+        </a>
+      ))}
+
+      <article class="content-panel">
+        <p class="eyebrow">Best fit</p>
+        <h3>Good reasons to write</h3>
+        <ul class="contact-list">
+          <li>Backend engineering discussions and practical Python work</li>
+          <li>Open source collaboration or technical writing ideas</li>
+          <li>Interesting problems involving systems, protocols, or tooling</li>
+        </ul>
+      </article>
+    </section>
+  </div>
+</Layout>

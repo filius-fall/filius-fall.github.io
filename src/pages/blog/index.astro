@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { siteMeta, withBase } from '../../lib/site.ts';
+
+const blog = await getCollection('blog');
+const sortedBlog = blog.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Writing" description={`Technical writing and notes from ${siteMeta.name}.`}>
+  <div class="shell-container page-shell">
+    <div class="page-intro">
+      <p class="eyebrow">Writing</p>
+      <h1>Notes on systems, protocols, software behavior, and the parts worth understanding properly.</h1>
+      <p>
+        Articles are written to be useful first: clear enough for learning, technical enough to reward rereading.
+      </p>
+    </div>
+
+    <section class="blog-grid">
+      {sortedBlog.map((post) => (
+        <article class="blog-card">
+          <div class="blog-card__meta">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </time>
+          </div>
+          <h3>{post.data.title}</h3>
+          {post.data.description && <p>{post.data.description}</p>}
+          <div class="chip-row">
+            {post.data.categories?.map((category) => (
+              <span class="chip">{category}</span>
+            ))}
+          </div>
+          <a href={withBase(`/blog/${post.id.replace('.md', '')}/`)} class="button button--ghost">
+            Read article
+          </a>
+        </article>
+      ))}
+    </section>
+  </div>
+</Layout>
